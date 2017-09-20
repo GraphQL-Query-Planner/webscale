@@ -1,4 +1,4 @@
-# webscale		+## Requirements
+# Webscale
 Web app used for demonstrating the GraphQL query planner
 
 ## Requirements
