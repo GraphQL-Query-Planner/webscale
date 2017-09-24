@@ -36,3 +36,27 @@ $ rails server
 ```
 
 Visit `http://localhost:3000/`.
+
+
+### MySQL Setup
+
+Webscale is configured to use MySQL as it's database. In macOS, MySQL can be installed using brew:
+
+```bash
+$ brew install mysql
+```
+
+By default the mysql user is root with no password.
+
+Once installed, you can now start `MySQL`:
+```bash
+$ brew services start mysql
+```
+
+Once installed, verify your environments connection to the database by creating the databases:
+
+```bash
+$ rake db:create
+Created database 'webscale_dev'
+Created database 'webscale_test'
+```
