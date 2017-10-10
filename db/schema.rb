@@ -14,34 +14,42 @@ ActiveRecord::Schema.define(version: 20170923230250) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
-    t.integer "user_id", null: false
-    t.integer "content_id", null: false
+    t.bigint "author_id", null: false
     t.string "content_type", null: false
+    t.integer "content_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["content_type", "content_id"], name: "index_comments_on_content_type_and_content_id"
   end
 
-  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id", null: false
-    t.integer "content_id", null: false
+  create_table "likes", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
     t.string "content_type", null: false
+    t.bigint "content_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["content_type", "content_id"], name: "index_likes_on_content_type_and_content_id"
+    t.index ["user_id", "content_id", "content_type"], name: "index_likes_on_user_id_and_content_id_and_content_type"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "post_id", null: false
+    t.bigint "post_id", null: false
     t.string "photo_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_photos_on_post_id"
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
-    t.integer "user_id", null: false
-    t.integer "receiver_id", null: false
+    t.bigint "author_id", null: false
+    t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["receiver_id"], name: "index_posts_on_receiver_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -50,6 +58,8 @@ ActiveRecord::Schema.define(version: 20170923230250) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["last_name", "first_name"], name: "index_users_on_last_name_and_first_name"
   end
 
 end
