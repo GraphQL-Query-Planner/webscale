@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170923230250) do
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
     t.integer "user_id", null: false
     t.integer "content_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170923230250) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "likes", force: :cascade do |t|
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.integer "content_id", null: false
     t.string "content_type", null: false
@@ -29,14 +29,14 @@ ActiveRecord::Schema.define(version: 20170923230250) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "photos", force: :cascade do |t|
+  create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "post_id", null: false
     t.string "photo_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
     t.integer "user_id", null: false
     t.integer "receiver_id", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20170923230250) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", null: false
     t.string "last_name"
     t.string "email", null: false
