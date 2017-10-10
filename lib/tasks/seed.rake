@@ -1,13 +1,18 @@
-require 'faker'
+require 'faker/user'
 
 namespace :seed do
   desc "Create users with data from ffaker."
   task users: :environment do
-    faker = Faker.new(count)
-    faker.create_users
+    faker = Faker::Users.new(count(:users))
+    faker.create!
   end
 end
 
-def count
-  ENV.fetch('NUM', 5).to_i
+def count(task_name)
+  case task_name
+  when :users
+    ENV.fetch("NUM_USERS", 50)
+  else
+    10
+  end
 end
