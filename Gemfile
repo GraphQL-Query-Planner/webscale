@@ -34,4 +34,9 @@ group :development do
   gem 'ffaker'
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'db-query-matchers'
+end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
