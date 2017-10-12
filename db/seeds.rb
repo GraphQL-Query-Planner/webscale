@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Rake::Task['seed:users'].invoke
+Rake::Task['seed:posts'].invoke
