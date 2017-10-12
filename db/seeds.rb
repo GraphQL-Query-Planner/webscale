@@ -8,3 +8,4 @@
 
 Rake::Task['seed:users'].invoke
 Rake::Task['seed:posts'].invoke
+Rake::Task['seed:photos'].invoke
