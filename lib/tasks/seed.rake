@@ -1,6 +1,7 @@
 require 'faker/user'
 require 'faker/post'
 require 'faker/photo'
+require 'faker/comment'
 
 namespace :seed do
   desc "Create users with data from ffaker."
@@ -22,6 +23,14 @@ namespace :seed do
     faker = Faker::Photos.new(count(:photos))
     faker.create!
   end
+
+  desc "Create comments with data from ffaker."
+  task comments: :environment do
+    abort('Please add at least one post and/or photo before running this task') if Post.count == 0
+
+    faker = Faker::Comments.new(count(:comments))
+    faker.create!
+  end
 end
 
 def count(task_name)
@@ -32,6 +41,8 @@ def count(task_name)
     ENV.fetch("NUM_POSTS", 1000).to_i
   when :photos
     ENV.fetch("NUM_PHOTOS", 200).to_i
+  when :comments
+    ENV.fetch("NUM_COMMENTS", 500).to_i
   else
     10
   end
