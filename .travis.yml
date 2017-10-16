@@ -1,4 +1,12 @@
 language: ruby
+
 rvm:
   - 2.4.1
+
 cache: bundler
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE webscale_test;'
