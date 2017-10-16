@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  has_many :posts, foreign_key: :user_id
-  has_many :wall_posts, foreign_key: :receiver_id
+  has_many :posts, foreign_key: :author_id, class_name: 'Post'
+  has_many :wall, foreign_key: :receiver_id, class_name: 'Post'
 
-  has_many :comments
+  has_many :comments, foreign_key: :author_id
   has_many :likes
 end
