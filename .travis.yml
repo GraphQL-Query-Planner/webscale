@@ -10,3 +10,8 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE webscale_test;'
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
