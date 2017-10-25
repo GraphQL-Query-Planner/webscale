@@ -37,6 +37,7 @@ module Explainer
 
     def validate!(explained_query)
       return if explained_query.keys == FIELDS
+      return if explained_query.keys == FIELDS - %i(partitions filtered) # CI (MySQL 5.6?)
       raise "Explain fields not equal\nExpected: #{FIELDS}\nGot: #{explained_query.keys}"
     end
   end

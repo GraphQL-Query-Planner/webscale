@@ -27,7 +27,7 @@ module Explainer
 
       explained_queries = values.map do |value|
         parsed_value = value[1..-1].split("|").map(&:strip)
-        transformed_values = Result::FIELDS.zip(parsed_value).to_h
+        transformed_values = fields.zip(parsed_value).to_h
         ExplainedQuery.new(transformed_values)
       end
 
