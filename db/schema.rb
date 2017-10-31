@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170923230250) do
     t.text "body"
     t.bigint "author_id", null: false
     t.string "content_type", null: false
-    t.integer "content_id", null: false
+    t.bigint "content_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"

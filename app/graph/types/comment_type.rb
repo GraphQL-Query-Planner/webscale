@@ -3,6 +3,7 @@ CommentType = GraphQL::ObjectType.define do
   description 'A comment a user left on some content.'
   global_id_field :id
 
-  field :author, !UserType, property: :user
+  field :body, !types.String
+  field :author, !UserType
   field :content, !ContentType
 end

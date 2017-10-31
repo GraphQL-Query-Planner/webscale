@@ -8,7 +8,7 @@ module Faker
       num_users = User.count
       Post.new(
         body: FFaker::DizzleIpsum.paragraph,
-        user_id: (rand * num_users).ceil,
+        author_id: (rand * num_users).ceil,
         receiver_id: (rand * num_users).ceil
       )
     end

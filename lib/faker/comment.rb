@@ -12,7 +12,7 @@ module Faker
 
       Comment.new(
         body: FFaker::DizzleIpsum.sentence,
-        user_id: (rand * User.count).ceil,
+        author_id: (rand * User.count).ceil,
         content_id: (rand * num_content).ceil,
         content_type: content_type
       )

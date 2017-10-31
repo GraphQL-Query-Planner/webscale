@@ -3,7 +3,7 @@ module Faker
     def initialize(default_count)
       @default_count = default_count
     end
-  
+
     def create!(count: default_count)
       build(count: count).each(&:save!)
     end
@@ -11,7 +11,7 @@ module Faker
     def create(count: default_count)
       build(count: count).each(&:save)
     end
-  
+
     def build(count: default_count)
       count.times.map { build_record }
     end

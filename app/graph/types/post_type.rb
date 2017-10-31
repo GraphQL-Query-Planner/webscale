@@ -4,6 +4,6 @@ PostType = GraphQL::ObjectType.define do
   global_id_field :id
 
   field :body, !types.String
-  field :author, UserType
-  field :receiver, UserType
+  field :author, !UserType
+  field :receiver, !UserType
 end
