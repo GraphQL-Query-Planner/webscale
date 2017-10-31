@@ -10,5 +10,13 @@ module Explainer
       @explained_queries = explained_queries
       @benchmark = benchmark
     end
+
+    def to_h
+      {
+        query: root,
+        benchmark: benchmark,
+        explained_queries: explained_queries.map(&:to_h)
+      }
+    end
   end
 end

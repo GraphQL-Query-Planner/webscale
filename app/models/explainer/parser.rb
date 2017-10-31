@@ -1,6 +1,3 @@
-require 'explainer/result'
-require 'explainer/explained_query'
-
 module Explainer
   class Parser
     class << self
