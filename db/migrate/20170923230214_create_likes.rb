@@ -1,6 +1,6 @@
 class CreateLikes < ActiveRecord::Migration[5.1]
   def change
-    create_table :likes, id: false do |t|
+    create_table :likes do |t|
       t.references :user, null: false
       t.references :content, null: false, polymorphic: true
 

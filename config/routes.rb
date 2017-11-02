@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :posts
   resources :photos
   resources :comments
+  resources :likes, except: [:show, :update, :edit]
 end
