@@ -9,7 +9,7 @@ class UsersController < ApiController
 
   # GET /users/1
   def show
-    render :json => user.to_json
+    render :json => @user.to_json
   end
 
   # POST /users
@@ -24,27 +24,27 @@ class UsersController < ApiController
 
   # PATCH/PUT /users/1
   def update
-    if user.update(user_params)
-      render :json => user.to_json
+    if @user.update(user_params)
+      render :json => @user.to_json
     else
-      render json: user.errors, status: :unprocessable_entity
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /users/1
   def destroy
-    user.destroy
-    render json: user.errors, notice: 'User was successfully destroyed.', status: :ok
+    @user.destroy
+    render json: @user.errors, notice: 'User was successfully destroyed.', status: :ok
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      user = User.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.permit(:first_name, :last_name, :email)
     end
-  end
+end

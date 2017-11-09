@@ -9,7 +9,7 @@ class PhotosController < ApiController
 
   # GET /photos/1
   def show
-    render :json => photo.to_json
+    render :json => @photo.to_json
   end
 
   # POST /photos
@@ -24,28 +24,27 @@ class PhotosController < ApiController
 
   # PATCH/PUT /photos/1
   def update
-    if photo.update(photo_params)
-      render :json => photo.to_json
+    if @photo.update(photo_params)
+      render :json => @photo.to_json
     else
-      render json: photo.errors, status: :unprocessable_entity
+      render json: @photo.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /photos/1
   def destroy
-    photo.destroy
+    @photo.destroy
     render json: 'Photo was successfully destroyed.', status: :ok
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
-      photo = Photo.find(params[:id])
+      @photo = Photo.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
       params.permit(:post_id, :photo_url)
     end
-
 end

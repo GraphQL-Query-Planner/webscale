@@ -9,7 +9,7 @@ class PostsController < ApiController
 
   # GET /posts/1
   def show
-    render :json => post.to_json
+    render :json => @post.to_json
   end
 
   # POST /posts
@@ -24,23 +24,23 @@ class PostsController < ApiController
 
   # PATCH/PUT /posts/1
   def update
-    if post.update(post_params)
-      render :json => post.to_json
+    if @post.update(post_params)
+      render :json => @post.to_json
     else
-      render json: post.errors, status: :unprocessable_entity
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /posts/1
   def destroy
-    post.destroy
+    @post.destroy
     render json: 'Post was successfully destroyed.', status: :ok
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      post = Post.find(params[:id])
+      @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
