@@ -7,7 +7,8 @@ module Graphql
     def execute(*args)
       instrumenter = Instrumentation.new
       result = schema(instrumenter).execute(*args)
-      result.merge(instrumentation: instrumenter.to_h)
+      result['instrumentation'] = instrumenter
+      result
     end
 
     private

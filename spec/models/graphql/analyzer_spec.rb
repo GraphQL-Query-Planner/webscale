@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Graphql::Analyzer do
-  let(:user) { create(:user) }
-  let(:query_string) { %|{ user(id: "#{user.to_global_id}") { id } }| }
+  let(:user) { create(:user, :with_posts) }
+  let(:query_string) { %|{ userA: user(id: "#{user.to_global_id}") { posts { id }  } }| }
   let(:analyzer) { Graphql::Analyzer.new(AppSchema) }
   let(:result) do
     res = analyzer.execute(query_string, context: {}, variables: {})
@@ -11,6 +11,6 @@ describe Graphql::Analyzer do
   end
 
   it 'should work' do
-    expect(result).to eq ''
+    expect(result['instrumentation']).to be_kind_of Graphql::Analyzer::Instrumentation
   end
 end
