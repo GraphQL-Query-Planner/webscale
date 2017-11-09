@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.5'
 
 # webscale
 gem 'graphql'
-gem 'graphiql-rails'
+gem 'graphiql-rails', :git => 'https://github.com/GraphQL-Query-Planner/graphiql-rails.git'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
