@@ -11,6 +11,6 @@ describe Graphql::Analyzer do
   end
 
   it 'should work' do
-    expect(result['instrumentation']).to be_kind_of Graphql::Analyzer::Instrumentation
+    expect(result['extensions']['analyzer']).to be_kind_of Graphql::Analyzer::Instrumentation
   end
 end

@@ -7,7 +7,8 @@ module Graphql
     def execute(*args)
       instrumenter = Instrumentation.new
       result = schema(instrumenter).execute(*args)
-      result['instrumentation'] = instrumenter
+      result['extensions'] ||= {}
+      result['extensions']['analyzer'] = instrumenter
       result
     end
 

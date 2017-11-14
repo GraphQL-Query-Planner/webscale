@@ -2,7 +2,7 @@ module Explainer
   class Result
     FIELDS = %i(id select_type table partitions type possible_keys key key_len ref  rows filtered extra).freeze
 
-    attr_accessor :selection
+    attr_accessor :path
     attr_reader :root, :explained_queries, :benchmark
     alias_method :queries, :explained_queries
 
@@ -17,7 +17,7 @@ module Explainer
         query: root,
         benchmark: benchmark,
         explained_queries: explained_queries.map(&:to_h),
-        selection: selection
+        path: path
       }
     end
   end

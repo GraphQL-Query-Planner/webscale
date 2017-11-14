@@ -15,9 +15,11 @@ module Graphql
       end
 
       def to_h
-        results.map do |field, result|
-          result.to_h.merge(selection: field)
-        end
+        {
+          execution: {
+            resolvers: @results.map(&:to_h)
+          }
+        }
       end
 
       private
@@ -32,23 +34,12 @@ module Graphql
           if queries.any?
             explain_output = ActiveRecord::Base.exec_explain(queries)
             result = Explainer::Parser.parse(explain_output)
-            result.selection = selection(ctx.path)
+            result.path = ctx.path
             results << result
           end
 
           field.resolve_proc.call(obj, args, ctx)
         end
-      end
-
-      def selection(field_names)
-        field_names.first + selection_i(field_names[1..-1].dup)
-      end
-      
-      def selection_i(field_names)
-        return '' if field_names.empty?
-        query_path = " { #{field_names.shift}"
-        query_path << selection_i(field_names) if field_names.any?
-        query_path << ' }'
       end
     end
   end
