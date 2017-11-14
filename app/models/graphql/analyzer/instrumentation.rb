@@ -22,6 +22,11 @@ module Graphql
         }
       end
 
+      def to_json(options = nil)
+        to_h
+      end
+      alias_method :as_json, :to_json
+
       private
 
       def analyze_resolve_proc(_type, field)
