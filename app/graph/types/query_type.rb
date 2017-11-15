@@ -4,21 +4,8 @@ QueryType = GraphQL::ObjectType.define do
 
   field :simple, !types.String, resolve: -> (_, args, _) { SecureRandom.uuid }
 
-  field :post, PostType, resolve: ActiveRecordResolver do
-    argument :id, !types.ID
-  end
-
-  field :photo, PhotoType, resolve: ActiveRecordResolver do
-    argument :id, !types.ID
-  end
-
-  field :comment, CommentType, resolve: ActiveRecordResolver do
-    argument :id, !types.ID
-  end
-
-  field :user, UserType, resolve: ActiveRecordResolver do
-    argument :id, !types.ID
-  end
+  field :node, GraphQL::Relay::Node.field
+  field :nodes, GraphQL::Relay::Node.plural_field
 
   field :like, LikeType do
     argument :user_id, !types.ID

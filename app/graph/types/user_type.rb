@@ -1,6 +1,9 @@
 UserType = GraphQL::ObjectType.define do
   name 'User'
   description 'A user'
+
+  implements GraphQL::Relay::Node.interface
+
   global_id_field :id
 
   field :first_name, !types.String
