@@ -26,6 +26,10 @@ module Explainer
       ">"
     end
 
+    def to_h
+      explained_query.to_h
+    end
+
     # the console will hide part of the data because the string is so long, so I filtered out some fields
     def inspect
       to_s.split("\n").reject { |line| line =~ /@id|@key_len|@rows|@filtered|@partitions/ }.join("\n")

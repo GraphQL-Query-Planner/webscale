@@ -1,11 +1,23 @@
 class GraphqlController < ApiController
   def query
-    query_variables = ensure_hash(params[:variables])
-    result = AppSchema.execute(params[:query], variables: query_variables)
-    render json: result
+    execute_query(AppSchema)
+  end
+
+  def analyze
+    execute_query(analyze_schema)
   end
 
   private
+
+  def execute_query(schema)
+    query_variables = ensure_hash(params[:variables])
+    result = schema.execute(params[:query], variables: query_variables)
+    render json: result
+  end
+
+  def analyze_schema
+    @analyze_schema ||= Graphql::Analyzer.new(AppSchema)
+  end
 
   def ensure_hash(query_variables)
     if query_variables.blank?
