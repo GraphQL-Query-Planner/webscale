@@ -18,6 +18,8 @@ gem 'jbuilder', '~> 2.5'
 # webscale
 gem 'graphql'
 gem 'graphiql-rails', :git => 'https://github.com/GraphQL-Query-Planner/graphiql-rails.git'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

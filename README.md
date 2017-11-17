@@ -60,3 +60,24 @@ $ rake db:create
 Created database 'webscale_dev'
 Created database 'webscale_test'
 ```
+
+### ElasticSearch Setup
+
+Webscale uses ElasticSearch for searching and aggregating data. In macOS, ElasticSearch can be installed using brew:
+
+```bash
+brew install elasticsearch
+```
+
+Once installed, you can now start `ElasticSearch`:
+Â
+```bash
+brew services start elasticsearch
+```
+
+#### Import your data models
+
+```bash
+bundle exec rake environment elasticsearch:import:model CLASS='Comment' FORCE=y
+bundle exec rake environment elasticsearch:import:model CLASS='Post' FORCE=y
+```
