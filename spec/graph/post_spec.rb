@@ -10,11 +10,13 @@ describe Post, type: :model do
     posts
     query_string = %|
       {
-        user(id: "#{user.to_global_id}") {
-          id
-          posts {
-            author {
-              id
+        node(id: "#{user.to_global_id}") {
+          ...on User {
+            id
+            posts {
+              author {
+                id
+              }
             }
           }
         }
