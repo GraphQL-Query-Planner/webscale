@@ -2,12 +2,10 @@ require 'rails_helper'
 require 'explainer/parser'
 
 describe Comment, type: :model do
-  let(:post_comments) { FactoryGirl.create_list(:post_comment, 5) }
-  let(:photo_comments) { FactoryGirl.create_list(:photo_comment, 3) }
+  let!(:post_comments) { FactoryGirl.create_list(:post_comment, 5) }
+  let!(:photo_comments) { FactoryGirl.create_list(:photo_comment, 3) }
 
   it "should not use index for content_type of comment" do
-    post_comments
-    photo_comments
     query_string = %|
       {
         comments(content_type: "Post") {
@@ -23,7 +21,9 @@ describe Comment, type: :model do
       explain_output = ActiveRecord::Base.exec_explain([query])
       result = Explainer::Parser.parse(explain_output)
     end
-    expect(results.first.explained_queries.first.key).to eq "NULL"
-    expect(results.first.explained_queries.first.extra).to eq "Using where"
+    explained_query = results.first.explained_queries.first
+
+    expect(explained_query).not_to be_indexed
+    expect(explained_query).to be_full_table_scan
   end
 end

@@ -2,12 +2,10 @@ require 'rails_helper'
 require 'explainer/parser'
 
 describe Post, type: :model do
-  let(:user) { create(:user) }
-  let(:posts) { FactoryGirl.create_list(:post, 5, author: user) }
+  let!(:user) { create(:user) }
+  let!(:posts) { FactoryGirl.create_list(:post, 5, author: user) }
 
   it "should make N+1 queries for the authors of posts" do
-    user
-    posts
     query_string = %|
       {
         node(id: "#{user.to_global_id}") {
