@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170923230250) do
     t.index ["content_type", "content_id"], name: "index_comments_on_content_type_and_content_id"
   end
 
-  create_table "likes", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
     t.string "content_type", null: false
     t.bigint "content_id", null: false
