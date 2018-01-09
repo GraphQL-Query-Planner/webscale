@@ -2,6 +2,7 @@ module Explainer
   class ExplainedQuery
     FIELDS = %i(id select_type table partitions type possible_keys key key_len ref rows filtered extra).freeze
     NULL = 'NULL'.freeze
+    ALL = 'ALL'.freeze
 
     FIELDS.each do |field|
       define_method(field) do
@@ -16,6 +17,10 @@ module Explainer
 
     def indexed?
       type == 'ref' && key != NULL
+    end
+
+    def full_table_scan?
+      type == ALL
     end
 
     def to_s

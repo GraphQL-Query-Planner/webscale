@@ -19,6 +19,12 @@ QueryType = GraphQL::ObjectType.define do
     end
   end
 
+  field :comments, types[CommentType] do
+    argument :content_type, !types.String
+
+    resolve -> (_, args, _) { Comment.where(content_type: args[:content_type]) }
+  end
+
   field :like, LikeType do
     argument :user_id, !types.ID
     argument :content_id, !types.ID
