@@ -93,6 +93,8 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     graphql (1.7.4)
+    graphql-analyzer (0.1.1)
+      graphql (>= 0.8, < 2)
     hashie (3.5.6)
     i18n (0.8.6)
     jbuilder (2.7.0)
@@ -242,6 +244,7 @@ DEPENDENCIES
   ffaker
   graphiql-rails!
   graphql
+  graphql-analyzer
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mysql2
@@ -259,4 +262,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0

@@ -21,6 +21,8 @@ gem 'graphiql-rails', :git => 'https://github.com/GraphQL-Query-Planner/graphiql
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+gem 'graphql-analyzer'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
