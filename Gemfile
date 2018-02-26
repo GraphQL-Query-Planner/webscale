@@ -6,8 +6,10 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.4'
-# Use mysql2 as the database for Active Record
-gem 'mysql2'
+# Use the following as the databases for Active Record
+gem 'mysql2' #default
+gem 'pg', '~> 0.18'
+# -------------------------
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

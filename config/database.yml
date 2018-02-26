@@ -8,7 +8,7 @@ default: &default
 
 development:
   <<: *default
-  database: webscale_dev
+  database: webscale_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,4 +19,4 @@ test:
 
 production:
   <<: *default
-  database: websscale_prod
+  database: websscale_production

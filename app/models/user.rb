@@ -3,5 +3,5 @@ class User < ApplicationRecord
   has_many :wall, foreign_key: :receiver_id, class_name: 'Post'
 
   has_many :comments, foreign_key: :author_id
-  has_many :likes
+  # has_many :likes
 end

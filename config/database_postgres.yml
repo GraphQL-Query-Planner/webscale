@@ -1,0 +1,24 @@
+postgres: &postgres
+  adapter: postgresql
+  encoding: utf8
+
+development:
+  <<: *postgres
+  host: localhost
+  pool: 10
+  database: webscale_postgres_development
+  username: postgres
+  password:
+
+test:
+  <<: *postgres
+  host: localhost
+  pool: 10
+  database: webscale_postgres_test
+  username: postgres
+  password:
+
+production:
+  <<: *postgres
+  url: <%= ENV["DATABASE_POSTGRES"] %>
+  pool: <%= ENV["DB_POOL"] || 5 %>
