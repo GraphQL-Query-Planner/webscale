@@ -31,4 +31,10 @@ QueryType = GraphQL::ObjectType.define do
 
     resolve -> (_, args, _) { Like.find_by(user_id: args[:user_id], content_id: args[:content_id]) }
   end
+
+  field :group, GroupType do
+    argument :id, !types.ID
+
+    resolve -> (_, args, _) { Group.find(args[:id]) }
+  end
 end
