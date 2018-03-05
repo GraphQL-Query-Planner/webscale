@@ -5,5 +5,5 @@ class Post < ApplicationRecord
   belongs_to :receiver, class_name: 'User'
 
   has_many :comments, as: :content
-  # has_many :likes, as: :content
+  has_many :likes, as: :content
 end

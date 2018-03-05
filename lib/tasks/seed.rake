@@ -35,7 +35,7 @@ namespace :seed do
 
   desc "Create likes."
   task likes: :environment do
-    # abort('Please add at least one post, photo, or comment before running this task') if Post.count == 0
+    abort('Please add at least one post, photo, or comment before running this task') if Post.count == 0
 
     faker = Faker::Likes.new(count(:likes))
     faker.create!
