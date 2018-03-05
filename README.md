@@ -40,7 +40,10 @@ Start your rails server.
 $ rails server
 ```
 
-Visit `http://localhost:3000/`.
+Visit `http://localhost:3000/graphiql-analyze`.
+
+Run a query and view the plugins tabs!
+![Plugins](./images/plugins.png)
 
 
 ### MySQL Setup
