@@ -19,6 +19,10 @@ QueryType = GraphQL::ObjectType.define do
     end
   end
 
+  connection :posts, PostType.connection_type do
+    resolve -> (_, args, _) { Post.all }
+  end
+
   field :comments, types[CommentType] do
     argument :content_type, !types.String
 
