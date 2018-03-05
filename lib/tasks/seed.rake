@@ -3,6 +3,7 @@ require 'faker/post'
 require 'faker/photo'
 require 'faker/comment'
 require 'faker/like'
+require 'faker/group'
 
 namespace :seed do
   desc "Create users with data from ffaker."
@@ -40,6 +41,12 @@ namespace :seed do
     faker = Faker::Likes.new(count(:likes))
     faker.create!
   end
+
+  desc "Create groups."
+  task groups: :environment do
+    faker = Faker::Groups.new(count(:groups))
+    faker.create!
+  end
 end
 
 def count(task_name)
@@ -54,6 +61,8 @@ def count(task_name)
     ENV.fetch("NUM_COMMENTS", 500).to_i
   when :likes
     ENV.fetch("NUM_LIKES", 2000).to_i
+  when :groups
+    ENV.fetch("NUM_GROUPS", 10).to_i
   else
     10
   end
