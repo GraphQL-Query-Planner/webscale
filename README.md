@@ -29,6 +29,11 @@ Install depenedcies.
 $ bundle install
 ```
 
+Setup the database, and seed it with fake data.
+```
+$ rake db:setup
+```
+
 Start your rails server.
 
 ```
