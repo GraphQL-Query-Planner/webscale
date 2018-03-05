@@ -15,6 +15,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 # webscale
 gem 'graphql'
 gem 'graphiql-rails', :git => 'https://github.com/GraphQL-Query-Planner/graphiql-rails.git'

@@ -11,6 +11,16 @@ module Webscale
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    # Allow Cross-Origin requests
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+          headers: :any,
+          methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      end
+    end
+
     config.autoload_paths << Rails.root.join('app', 'graph')
     config.autoload_paths << Rails.root.join('app', 'graph', 'types')
     config.autoload_paths << Rails.root.join('app', 'graph', 'resolvers')
