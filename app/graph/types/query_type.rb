@@ -23,10 +23,11 @@ QueryType = GraphQL::ObjectType.define do
     resolve -> (_, args, _) { Post.all }
   end
 
-  field :comments, types[CommentType] do
-    argument :content_type, !types.String
+  connection :comments, CommentType.connection_type do
+    argument :content_id, !types.ID
+    argument :content_type, !types.ID
 
-    resolve -> (_, args, _) { Comment.where(content_type: args[:content_type]) }
+    resolve -> (_, args, _) { Comment.where(content_id: args[:content_id], content_type: args[:content_type]) }
   end
 
   connection :users, UserType.connection_type do

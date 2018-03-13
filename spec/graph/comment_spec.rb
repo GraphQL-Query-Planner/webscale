@@ -2,14 +2,18 @@ require 'rails_helper'
 require 'explainer/parser'
 
 describe Comment, type: :model do
-  let!(:post_comments) { FactoryGirl.create_list(:post_comment, 5) }
-  let!(:photo_comments) { FactoryGirl.create_list(:photo_comment, 3) }
+  let!(:post) { create(:post) }
+  let!(:post_comments) { FactoryGirl.create_list(:post_comment, 5, content: post) }
 
   it "should not use index for content_type of comment" do
     query_string = %|
       {
-        comments(content_type: "Post") {
-          id
+        comments(content_id: #{post.id}, content_type: "Post") {
+          edges{
+            node {
+              id
+            }
+          }
         }
       }
     |
