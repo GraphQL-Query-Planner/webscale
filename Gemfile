@@ -19,7 +19,7 @@ gem 'rack-cors', :require => 'rack/cors'
 
 # webscale
 gem 'graphql'
-gem 'graphiql-rails', :git => 'https://github.com/GraphQL-Query-Planner/graphiql-rails.git'
+gem 'graphiql-rails', :git => 'https://github.com/GraphQL-Query-Planner/graphiql-rails.git', :branch => 'master'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
