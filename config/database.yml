@@ -17,6 +17,14 @@ test:
   <<: *default
   database: webscale_test
 
+<% 
+url = ENV["CLEARDB_DATABASE_URL"]
+_, username, password, host, db_name = *url.sub('mysql://', '').match(/^(.+):(.+)@(.+)\/(.+)\?/)
+%>
+
 production:
   <<: *default
-  database: websscale_prod
+  database: <%= db_name %>
+  username: <%= username %>
+  password: <%= password %>
+  host: <%= host %>
