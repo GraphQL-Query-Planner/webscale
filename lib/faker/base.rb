@@ -1,3 +1,5 @@
+require 'ffaker'
+
 module Faker
   class Base
     def initialize(default_count)
