@@ -5,11 +5,18 @@ module Faker
     private
 
     def build_record
-      num_posts = Post.count
       Photo.new(
-        post_id: (rand * num_posts).ceil,
+        post_id: rand_id,
         photo_url: FFaker::Internet.http_url
       )
+    end
+
+    def rand_id
+      post_ids[(rand * post_ids.size).floor]
+    end
+
+    def post_ids
+      @post_ids ||= Post.all.pluck(:id)
     end
   end
 end
