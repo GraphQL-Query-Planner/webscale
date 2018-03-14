@@ -7,6 +7,10 @@ cache: bundler
 
 services:
   - mysql
+  - elasticsearch
+
+before_script:
+  - sleep 10 # To make sure Elasticsearch instance is ready
 
 before_install:
   - mysql -e 'CREATE DATABASE webscale_test;'

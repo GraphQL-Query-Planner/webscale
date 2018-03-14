@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Post, type: :model do
+describe Post, type: :model, elasticsearch: true do
   context 'initialized with associations' do
     let(:user) { build(:user) }
     let(:post) { build(:post, author: user, receiver: user) }

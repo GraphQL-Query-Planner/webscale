@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'explainer/parser'
 
-describe Comment, type: :model do
+describe Comment, type: :model, elasticsearch: true do
   let!(:post) { create(:post) }
   let!(:post_comments) { FactoryGirl.create_list(:post_comment, 5, content: post) }
 

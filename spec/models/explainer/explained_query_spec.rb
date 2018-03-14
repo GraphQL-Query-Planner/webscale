@@ -1,7 +1,7 @@
 require "rails_helper"
 require 'explainer/parser'
 
-describe Explainer::ExplainedQuery do
+describe Explainer::ExplainedQuery, elasticsearch: true do
 
   it 'the query is indexed' do
     output = Post.where(author_id: 1).explain

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PostsController, type: :controller do
+describe PostsController, type: :controller, elasticsearch: true do
   describe "GET index" do
     let(:posts) { Faker::Posts.new(3).create }
 

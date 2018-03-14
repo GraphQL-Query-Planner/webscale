@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'explainer/parser'
 
-describe Post, type: :model do
+describe Post, type: :model, elasticsearch: true do
   let!(:user) { create(:user) }
   let!(:posts) { FactoryGirl.create_list(:post, 5, author: user) }
 

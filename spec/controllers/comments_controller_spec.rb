@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CommentsController, type: :controller do
+describe CommentsController, type: :controller, elasticsearch: true do
   describe "GET index" do
     context 'initialized with content type post' do
       let(:user) { create(:user) }

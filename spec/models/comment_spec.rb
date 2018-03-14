@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Comment, type: :model do
+describe Comment, type: :model, elasticsearch: true do
   context 'initialized with content type post' do
     let(:user) { build(:user) }
     let(:post) { build(:post) }
