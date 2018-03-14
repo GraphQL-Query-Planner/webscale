@@ -3,6 +3,7 @@ require "apollo/tracing"
 AppSchema = GraphQL::Schema.define do
   query QueryType
   use ApolloTracing.new
+  use GraphQL::Batch
 
   id_from_object ->(object, _, _) { object.to_global_id.to_s }
   object_from_id -> (id, _ctx) { ActiveRecordResolver.call(nil, { id: id }, nil) }

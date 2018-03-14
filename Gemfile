@@ -24,6 +24,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
 gem 'graphql-analyzer'
+gem 'graphql-batch'
 
 # Apollo tracing
 gem 'apollo-tracing'
