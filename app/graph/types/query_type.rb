@@ -20,7 +20,15 @@ QueryType = GraphQL::ObjectType.define do
   end
 
   connection :posts, PostType.connection_type do
-    resolve -> (_, args, _) { Post.all }
+    argument :receiver_id, types.ID
+
+    resolve -> (_, args, _) {
+      if args[:receiver_id]
+        Post.where(receiver_id: args[:receiver_id])
+      else
+        Post.all
+      end
+    }
   end
 
   connection :comments, CommentType.connection_type do
