@@ -16,7 +16,12 @@ class GraphqlController < ApiController
   end
 
   def analyze_schema
-    @analyze_schema ||= AppSchema.redefine { use GraphQL::Analyzer.new([GraphQL::Analyzer::Instrumentation::Mysql.new]) }
+    @analyze_schema ||= AppSchema.redefine do
+      use GraphQL::Analyzer.new([
+        GraphQL::Analyzer::Instrumentation::Mysql.new,
+        GraphQL::Analyzer::Instrumentation::ElasticSearch.new
+      ])
+    end
   end
 
   def ensure_hash(query_variables)
