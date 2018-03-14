@@ -47,11 +47,11 @@ def count(task_name)
   when :users
     ENV.fetch("NUM_USERS", 50).to_i
   when :posts
-    ENV.fetch("NUM_POSTS", 1000).to_i
+    ENV.fetch("NUM_POSTS", 500).to_i
   when :photos
     ENV.fetch("NUM_PHOTOS", 200).to_i
   when :comments
-    ENV.fetch("NUM_COMMENTS", 500).to_i
+    ENV.fetch("NUM_COMMENTS", 2000).to_i
   when :likes
     ENV.fetch("NUM_LIKES", 2000).to_i
   else
