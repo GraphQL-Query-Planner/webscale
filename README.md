@@ -1,5 +1,8 @@
 # Webscale
-Web app used for demonstrating the GraphQL query planner
+
+[![Build Status](https://travis-ci.org/GraphQL-Query-Planner/webscale.svg?branch=master)](https://travis-ci.org/GraphQL-Query-Planner/webscale)
+
+A web app used for demonstrating [graphql-analyzer](https://github.com/GraphQL-Query-Planner/graphql-analyzer)
 
 ## Requirements
 
