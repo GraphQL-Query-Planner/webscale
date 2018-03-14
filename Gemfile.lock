@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/GraphQL-Query-Planner/graphiql-rails.git
-  revision: d53254348e1f72ce7f04842c2f144e08c05af535
+  revision: 04b466d44be95d5b240ff3a49770a234d29fd8e6
   branch: master
   specs:
     graphiql-rails (1.4.5)
