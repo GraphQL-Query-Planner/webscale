@@ -11,7 +11,13 @@ UserType = GraphQL::ObjectType.define do
   field :email, !types.String
 
   field :posts, types[PostType]
-  field :wall, types[PostType]
+  field :wall, types[PostType] do
+    resolve -> (user, _, _) do
+      AssociationLoader.for(:wall).load(user).then do
+        user.wall
+      end
+    end
+  end
   field :comments, types[CommentType]
   field :likes, types[LikeType]
 end
