@@ -5,6 +5,12 @@ rvm:
 
 cache: bundler
 
+addons:
+  apt:
+    sources:
+      - elasticsearch-2.x
+    packages:
+    - elasticsearch=2.4.5
 services:
   - mysql
   - elasticsearch

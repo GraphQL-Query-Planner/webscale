@@ -26,7 +26,7 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-Elasticsearch::Model.client = Elasticsearch::Client.new(host: 'localhost:9250')
+Elasticsearch::Model.client = Elasticsearch::Client.new(host: 'localhost:9250', logger: Rails.logger)
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
