@@ -18,7 +18,7 @@ test:
   database: webscale_test
 
 <% 
-url = ENV["CLEARDB_DATABASE_URL"]
+url = ENV["CLEARDB_DATABASE_URL"] || ''
 _, username, password, host, db_name = *url.sub('mysql://', '').match(/^(.+):(.+)@(.+)\/(.+)\?/)
 %>
 
