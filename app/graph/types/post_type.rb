@@ -12,6 +12,9 @@ PostType = GraphQL::ObjectType.define do
   field :likes, !types[LikeType] do
     resolve -> (post, args, _) { post.likes }
   end
+  field :comments, !types[CommentType] do
+    resolve -> (post, args, _) { post.comments}
+  end
   field :comments_count, !types.Int do
     resolve -> (post, args, _) { post.comments.count }
   end

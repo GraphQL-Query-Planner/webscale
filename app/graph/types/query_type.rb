@@ -22,7 +22,6 @@ QueryType = GraphQL::ObjectType.define do
   connection :posts, PostType.connection_type do
     argument :max_id, types.ID
     argument :min_id, types.ID
-    argument :receiver_id, types.ID
 
     resolve -> (_, args, _) {
       if args[:min_id] && [:max_id]
@@ -39,16 +38,6 @@ QueryType = GraphQL::ObjectType.define do
       end
 
       Post.where(receiver_condition).where(id_range_condition)
-    }
-  end
-
-  connection :comments, CommentType.connection_type do
-    argument :content_id, !types.ID
-    argument :content_type, !types.String
-
-    resolve -> (_, args, _) {
-      content_id = GlobalID::Locator.locate(args[:content_id]).id
-      Comment.where(content_id: content_id, content_type: args[:content_type])
     }
   end
 
