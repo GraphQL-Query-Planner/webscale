@@ -12,11 +12,18 @@ UserType = GraphQL::ObjectType.define do
 
   field :posts, types[PostType]
   field :wall, types[PostType] do
-    resolve -> (user, _, _) do
-      AssociationLoader.for(:wall).load(user).then do
-        user.wall
+    argument :max_id, types.ID
+    argument :min_id, types.ID
+
+    resolve -> (user, args, _) {
+      if args[:min_id] && [:max_id]
+        id_range_condition = { id: args[:min_id]..args[:max_id] }
+      else
+        id_range_condition = nil
       end
-    end
+
+      user.wall.where(id_range_condition)
+    }
   end
   field :comments, types[CommentType]
   field :likes, types[LikeType]
