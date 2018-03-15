@@ -44,7 +44,7 @@ QueryType = GraphQL::ObjectType.define do
 
   connection :comments, CommentType.connection_type do
     argument :content_id, !types.ID
-    argument :content_type, !types.ID
+    argument :content_type, !types.String
 
     resolve -> (_, args, _) {
       content_id = GlobalID::Locator.locate(args[:content_id]).id
@@ -54,7 +54,7 @@ QueryType = GraphQL::ObjectType.define do
 
   connection :likes, LikeType.connection_type do
     argument :content_id, !types.ID
-    argument :content_type, !types.ID
+    argument :content_type, !types.String
     argument :user_id, types.ID
 
     resolve -> (_, args, _) {
