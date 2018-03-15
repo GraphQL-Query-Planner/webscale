@@ -12,7 +12,7 @@ Select the first ten posts on a user's wall, and get:
 
 ```
 {
-  posts(first: 10, receiver_id: 1) {
+  posts(first: 10, receiver_id: "gid://webscale/User/1") {
     edges {
       node {
         id
@@ -34,7 +34,7 @@ Select the comments for a specific post
 
 ```
 {
-  comments(content_id: 1, content_type: "Post") {
+  comments(content_id: "gid://webscale/Post/1", content_type: "Post") {
     edges{
       node {
         id
@@ -51,7 +51,7 @@ If we forget to add an index on the `users` table for `first_name`, we'll get a 
 
 ```
 {
-  users(first_name: "Darrel") {
+  users(first_name: "Roderick") {
     edges{
       node {
         id
@@ -68,7 +68,7 @@ The query above does a full table scan
 This query below which searches on last name will only search 1 row, since last_name is indexed.
 ```
 {
-  users(last_name: "Kunde") {
+  users(last_name: "Hane") {
     edges{
       node {
         id
@@ -86,7 +86,7 @@ This query below which searches on last name will only search 1 row, since last_
 Select posts for a specific receiver within a certain range of IDs.
 ```
 {
-  posts(receiver_id: 1, min_id: 1, max_id: 500) {
+  posts(receiver_id: "gid://webscale/User/1", min_id: 1, max_id: 500) {
     edges{
       node {
         id
@@ -101,7 +101,7 @@ Select posts for a specific receiver within a certain range of IDs.
 Find a like on a specific post by a specific user
 ```
 {
-  likes(content_id: 11, content_type: "Post", user_id: 2) {
+  likes(content_id: "gid://webscale/Post/11", content_type: "Post", user_id: "gid://webscale/User/2") {
     edges{
       node {
         id
