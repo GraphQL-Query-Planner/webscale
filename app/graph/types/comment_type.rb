@@ -9,7 +9,5 @@ CommentType = GraphQL::ObjectType.define do
   field :body, !types.String
   field :author, !UserType
   field :content, !ContentType
-  field :likes, !types[LikeType] do
-    resolve -> (comment, args, _) { comment.likes }
-  end
+  field :likes, !types[LikeType]
 end

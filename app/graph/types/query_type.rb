@@ -22,7 +22,6 @@ QueryType = GraphQL::ObjectType.define do
   connection :posts, PostType.connection_type do
     argument :max_id, types.ID
     argument :min_id, types.ID
-    argument :receiver_id, types.ID
 
     resolve -> (_, args, _) {
       if args[:min_id] && [:max_id]
@@ -31,27 +30,23 @@ QueryType = GraphQL::ObjectType.define do
         id_range_condition = nil
       end
 
-      if args[:receiver_id]
-        receiver_id = GlobalID::Locator.locate(args[:receiver_id]).id
-        receiver_condition = { receiver_id: receiver_id }
-      else
-        receiver_condition = nil
-      end
-
-      Post.where(receiver_condition).where(id_range_condition)
+      Post.where(id_range_condition)
     }
   end
 
-  connection :comments, CommentType.connection_type do
-    argument :content_id, !types.ID
-    argument :content_type, !types.String
+  connection :users, UserType.connection_type do
+    argument :first_name, types.String
+    argument :last_name, types.String
 
     resolve -> (_, args, _) {
-      content_id = GlobalID::Locator.locate(args[:content_id]).id
-      Comment.where(content_id: content_id, content_type: args[:content_type])
+      first_name_condition = args[:first_name] ? {first_name: args[:first_name]} : nil
+      last_name_condition = args[:last_name] ? {last_name: args[:last_name]} : nil
+
+      User.where(first_name_condition).where(last_name_condition)
     }
   end
 
+  # This shouldn't be used by the client. It exists for demo purposes
   connection :likes, LikeType.connection_type do
     argument :content_id, !types.ID
     argument :content_type, !types.String
@@ -70,26 +65,4 @@ QueryType = GraphQL::ObjectType.define do
     }
   end
 
-  connection :users, UserType.connection_type do
-    argument :first_name, types.String
-    argument :last_name, types.String
-
-    resolve -> (_, args, _) {
-      first_name_condition = args[:first_name] ? {first_name: args[:first_name]} : nil
-      last_name_condition = args[:last_name] ? {last_name: args[:last_name]} : nil
-
-      User.where(first_name_condition).where(last_name_condition)
-    }
-  end
-
-  field :like, LikeType do
-    argument :user_id, !types.ID
-    argument :content_id, !types.ID
-
-    resolve -> (_, args, _) {
-      user_id = GlobalID::Locator.locate(args[:user_id]).id
-      content_id = GlobalID::Locator.locate(args[:content_id]).id
-      Like.find_by(user_id: user_id, content_id: content_id)
-    }
-  end
 end

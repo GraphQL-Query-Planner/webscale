@@ -7,11 +7,16 @@ PostType = GraphQL::ObjectType.define do
   global_id_field :id
 
   field :body, !types.String
-  field :author, !UserType
-  field :receiver, !UserType
-  field :likes, !types[LikeType] do
-    resolve -> (post, args, _) { post.likes }
+  field :author, !UserType do
+    resolve -> (post, _, _) do
+      AssociationLoader.for(:author).load(post).then do
+        post.author
+      end
+    end
   end
+  field :receiver, !UserType
+  field :likes, !types[LikeType]
+  field :comments, !types[CommentType]
   field :comments_count, !types.Int do
     resolve -> (post, args, _) { post.comments.count }
   end

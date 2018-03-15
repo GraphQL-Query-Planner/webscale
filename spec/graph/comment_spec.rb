@@ -12,9 +12,10 @@ describe Comment, type: :model do
   it "should use index for content_type of comment" do
     query_string = %|
       {
-        comments(content_id: "gid://webscale/Post/#{post.id}", content_type: "Post") {
-          edges{
-            node {
+        node(id: "gid://webscale/Post/#{post.id}") {
+          id
+          ...on Post {
+            comments {
               id
             }
           }
