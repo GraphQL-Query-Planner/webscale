@@ -8,7 +8,6 @@ PhotoType = GraphQL::ObjectType.define do
 
   field :post, !PostType
   field :photo_url, !types.String
-  field :comments, !types[CommentType] do
-    resolve -> (photo, args, _) { photo.comments}
-  end
+  field :comments, !types[CommentType]
+  field :likes, !types[LikeType]
 end
