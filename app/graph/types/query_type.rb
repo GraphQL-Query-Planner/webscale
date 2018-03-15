@@ -30,14 +30,7 @@ QueryType = GraphQL::ObjectType.define do
         id_range_condition = nil
       end
 
-      if args[:receiver_id]
-        receiver_id = GlobalID::Locator.locate(args[:receiver_id]).id
-        receiver_condition = { receiver_id: receiver_id }
-      else
-        receiver_condition = nil
-      end
-
-      Post.where(receiver_condition).where(id_range_condition)
+      Post.where(id_range_condition)
     }
   end
 
