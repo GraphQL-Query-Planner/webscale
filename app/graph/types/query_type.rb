@@ -45,4 +45,24 @@ QueryType = GraphQL::ObjectType.define do
       User.where(first_name_condition).where(last_name_condition)
     }
   end
+
+  # This shouldn't be used by the client. It exists for demo purposes
+  connection :likes, LikeType.connection_type do
+    argument :content_id, !types.ID
+    argument :content_type, !types.String
+    argument :user_id, types.ID
+
+    resolve -> (_, args, _) {
+      content_id = GlobalID::Locator.locate(args[:content_id]).id
+
+      if args[:user_id]
+        user_id = GlobalID::Locator.locate(args[:user_id]).id
+        user_condition = { user_id: user_id }
+      else
+        user_condition = nil
+      end
+      Like.ignore_index("index_likes_on_user_id_and_content_id_and_content_type").where(user_condition).where(content_id: content_id, content_type: args[:content_type])
+    }
+  end
+
 end
