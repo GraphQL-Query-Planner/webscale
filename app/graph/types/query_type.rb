@@ -45,15 +45,4 @@ QueryType = GraphQL::ObjectType.define do
       User.where(first_name_condition).where(last_name_condition)
     }
   end
-
-  field :like, LikeType do
-    argument :user_id, !types.ID
-    argument :content_id, !types.ID
-
-    resolve -> (_, args, _) {
-      user_id = GlobalID::Locator.locate(args[:user_id]).id
-      content_id = GlobalID::Locator.locate(args[:content_id]).id
-      Like.find_by(user_id: user_id, content_id: content_id)
-    }
-  end
 end
