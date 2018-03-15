@@ -25,28 +25,48 @@ QueryType = GraphQL::ObjectType.define do
     argument :receiver_id, types.ID
 
     resolve -> (_, args, _) {
-      id_cond = args[:min_id] && [:max_id] ? { id: args[:min_id]..args[:max_id] } : nil
-      receiver_cond = args[:receiver_id] ? { receiver_id: args[:receiver_id] } : nil
+      if args[:min_id] && [:max_id]
+        id_range_condition = { id: args[:min_id]..args[:max_id] }
+      else
+        id_range_condition = nil
+      end
 
-      Post.where(receiver_cond).where(id_cond)
+      if args[:receiver_id]
+        receiver_id = GlobalID::Locator.locate(args[:receiver_id]).id
+        receiver_condition = { receiver_id: receiver_id }
+      else
+        receiver_condition = nil
+      end
+
+      Post.where(receiver_condition).where(id_range_condition)
     }
   end
 
   connection :comments, CommentType.connection_type do
     argument :content_id, !types.ID
-    argument :content_type, !types.ID
+    argument :content_type, !types.String
 
-    resolve -> (_, args, _) { Comment.where(content_id: args[:content_id], content_type: args[:content_type]) }
+    resolve -> (_, args, _) {
+      content_id = GlobalID::Locator.locate(args[:content_id]).id
+      Comment.where(content_id: content_id, content_type: args[:content_type])
+    }
   end
 
   connection :likes, LikeType.connection_type do
     argument :content_id, !types.ID
-    argument :content_type, !types.ID
+    argument :content_type, !types.String
     argument :user_id, types.ID
 
     resolve -> (_, args, _) {
-      user_cond = args[:user_id] ? { user_id: args[:user_id] } : nil
-      Like.ignore_index("index_likes_on_user_id_and_content_id_and_content_type").where(user_cond).where(content_id: args[:content_id], content_type: args[:content_type])
+      content_id = GlobalID::Locator.locate(args[:content_id]).id
+
+      if args[:user_id]
+        user_id = GlobalID::Locator.locate(args[:user_id]).id
+        user_condition = { user_id: user_id }
+      else
+        user_condition = nil
+      end
+      Like.ignore_index("index_likes_on_user_id_and_content_id_and_content_type").where(user_condition).where(content_id: content_id, content_type: args[:content_type])
     }
   end
 
@@ -55,10 +75,10 @@ QueryType = GraphQL::ObjectType.define do
     argument :last_name, types.String
 
     resolve -> (_, args, _) {
-      first_name_cond = args[:first_name] ? {first_name: args[:first_name]} : nil
-      last_name_cond = args[:last_name] ? {last_name: args[:last_name]} : nil
+      first_name_condition = args[:first_name] ? {first_name: args[:first_name]} : nil
+      last_name_condition = args[:last_name] ? {last_name: args[:last_name]} : nil
 
-      User.where(first_name_cond).where(last_name_cond)
+      User.where(first_name_condition).where(last_name_condition)
     }
   end
 
@@ -66,6 +86,10 @@ QueryType = GraphQL::ObjectType.define do
     argument :user_id, !types.ID
     argument :content_id, !types.ID
 
-    resolve -> (_, args, _) { Like.find_by(user_id: args[:user_id], content_id: args[:content_id]) }
+    resolve -> (_, args, _) {
+      user_id = GlobalID::Locator.locate(args[:user_id]).id
+      content_id = GlobalID::Locator.locate(args[:content_id]).id
+      Like.find_by(user_id: user_id, content_id: content_id)
+    }
   end
 end
